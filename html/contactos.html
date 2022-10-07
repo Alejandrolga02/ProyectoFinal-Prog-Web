@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Contactos</title>
+
+    <!-- Importar fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <!-- Precargar estilos y scripts -->
+    <link rel="preload" href="../css/estilos.css" as="style">
+    <link rel="preload" href="../css/bootstrap.min.css" as="style">
+    <link rel="preload" href="../js/bootstrap.bundle.min.js" as="script">
+
+    <!-- Importar estilos y scripts -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <header class="header bg-dark">
+        <h6 class="text-white">Bienvenidos a AleTech</h6>
+    </header>
+
+    <nav class="navbar navbar-expand-lg bg-warning">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">AleTech</a>
+            <button class="navbar-toggler bg-warning" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="../index.html">Home</a>
+                    <a class="nav-link" href="empresa.html">Empresa</a>
+                    <a class="nav-link" href="productos.html">Productos</a>
+                    <a class="nav-link active" href="#">Contactos</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <h1 class="text-center my-4">Contactos</h1>
+        <section class="contenedor bg-info">
+            <form action="2020030319@upsin.edu.mx" method="post">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="name" placeholder="Introduzca un nombre" required />
+                <label for="correo">Correo</label>
+                <input type="email" id="correo" name="correo" placeholder="Introduzca un correo" required
+                    pattern="[a-z0-9,_+-%]+@+[a-z0-9]+.+[a-z]" />
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" name="fecha" min="2022-01-01" max="2022-12-31" required />
+                <label for="lugar">Lugar de nacimiento</label>
+                <input list="estados" id="lugar" name="lugar" placeholder="Introduzca un estado" required />
+                <datalist id="estados" name="estados">
+                    <option value="Sinaloa"></option>
+                    <option value="Sonora"></option>
+                    <option value="Nayarit"></option>
+                    <option value="Jalisco"></option>
+                    <option value="Durango"></option>
+                </datalist>
+                <label for="poblacion">Poblacion</label>
+                <input type="text" id="poblacion" name="poblacion" placeholder="Introduzca la poblacion" required />
+
+                <hr />
+
+                <div class="seccion">
+                    <h3 class="encabezado">Selecciona un sexo</h3>
+                    <div class="labels">
+                        <label for="masculino">Masculino</label>
+                        <input type="radio" name="sexo" id="masculino" />
+                        <label for="femenino">Femenino</label>
+                        <input type="radio" name="sexo" id="femenino" />
+                        <label for="anonimo">Otro</label>
+                        <input type="radio" name="sexo" id="otro" />
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="seccion">
+                    <h3 class="encabezado">Estudios</h3>
+                    <div class="labels">
+                        <label for="primaria">Primaria</label>
+                        <input type="checkbox" name="primaria" id="primaria" />
+                        <label for="secundaria">Secundaria</label>
+                        <input type="checkbox" name="secundaria" id="secundaria" />
+                        <label for="preparatoria">Preparatoria</label>
+                        <input type="checkbox" name="preparatoria" id="preparatoria" />
+                        <label for="universidad">Universidad</label>
+                        <input type="checkbox" name="universidad" id="universidad" />
+                    </div>
+                </div>
+
+                <hr />
+
+                <h3>Nivel de ingresos</h3>
+                <input type="range" name="monto" id="monto" max="10000" min="0" value="5000" />
+
+                <hr />
+
+                <h3>Estado civil</h3>
+                <select name="edocivil" id="edocivil">
+                    <option value="1">Soltero</option>
+                    <option value="2">Casado</option>
+                    <option value="3">viudo</option>
+                    <option value="4">Divorciado</option>
+                </select>
+
+                <hr />
+
+                <h3>Comentarios</h3>
+                <textarea name="comentario" id="comentario" placeholder="Escriba sus opiniones"></textarea>
+
+                <div class="botones">
+                    <input type="submit" value="Enviar" class="boton" />
+                    <input type="reset" value="Limpiar" class="boton" />
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer bg-secondary">
+        <h6 class="text-black fw-bolder">Todos los derechos reservados Alejandro Ivan Lizarraga Rojas</h6>
+    </footer>
+</body>
+
+</html>
