@@ -28,3 +28,42 @@ html {
     bottom: 0px;
     width: 100%;
 }
+
+.product-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 10px;
+}
+
+.product {
+    border: 2px solid gray;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.btn {
+    font-size: 15px;
+}
+
+.product > .product-title {
+    font-size: 20px;
+}
+
+@media (min-width: 576px) {
+    .product-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 768px) {
+    .product-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 1200px) {
+    .product-container {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
