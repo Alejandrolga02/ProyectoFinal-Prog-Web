@@ -6,6 +6,7 @@
     --secundario: #0097A7;
     --gris: #757575;
     --grisClaro: #DFE9F3;
+    --border: 1px solid rgba(0, 0, 0, 0.175);
     --fuente: 'Montserrat', sans-serif;
 }
 
@@ -36,10 +37,18 @@ html {
 }
 
 .product {
-    border: 2px solid gray;
-    border-radius: 6px;
+    border: var(--border);
+    border-radius: 0.375rem;
     margin-bottom: 10px;
-    padding: 5px;
+}
+
+.product h4 {
+    margin: 10px;
+}
+
+.botones {
+    text-align: end;
+    margin: 10px;
 }
 
 .btn {
@@ -66,4 +75,10 @@ html {
     .product-container {
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
+}
+
+.precio {
+    color: var(--oscuro);
+    margin: 10px;
+    font-weight: 700;
 }
