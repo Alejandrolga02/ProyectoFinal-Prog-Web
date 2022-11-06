@@ -1,84 +1,99 @@
 /* Paleta de colores */
 :root {
-    --blanco: #fff;
-    --oscuro: #212121;
-    --primario: #FFC107;
-    --secundario: #0097A7;
-    --gris: #757575;
-    --grisClaro: #DFE9F3;
-    --border: 1px solid rgba(0, 0, 0, 0.175);
-    --fuente: 'Montserrat', sans-serif;
+	--blanco: #fff;
+	--oscuro: #212121;
+	--navbar: #031926;
+	--head: #468189;
+	--main: #f2f4f3;
+	--footer: #3e000c;
+	--gris: #757575;
+	--grisClaro: #dfe9f3;
+	--border: 1px solid rgba(0, 0, 0, 0.175);
+	--fuente: "Montserrat", sans-serif;
 }
 
 /* Box Sizing */
 html {
-    box-sizing: border-box;
-    scroll-snap-type: y mandatory;
+	box-sizing: border-box;
+	scroll-snap-type: y mandatory;
 }
 
 *,
 *:before,
 *:after {
-    box-sizing: inherit;
-    font-family: var(--fuente);
+	box-sizing: inherit;
+	font-family: var(--fuente);
 }
 
-.footer {
-    position: fixed;
-    left: 0px;
-    bottom: 0px;
-    width: 100%;
+.bg-head {
+	background-color: var(--head);
 }
 
-.product-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    column-gap: 10px;
+.bg-navbar {
+	background-color: var(--navbar);
+}
+
+.bg-main {
+	background-color: var(--main);
+}
+
+.bg-footer {
+	background-color: var(--footer);
+}
+
+.products-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	column-gap: 10px;
 }
 
 .product {
-    border: var(--border);
-    border-radius: 0.375rem;
-    margin-bottom: 10px;
+	border: var(--border);
+	border-radius: 0.375rem;
+	margin-bottom: 10px;
 }
 
 .product h4 {
-    margin: 10px;
+	margin: 10px;
 }
 
 .botones {
-    text-align: end;
-    margin: 10px;
+	text-align: end;
+	margin: 10px;
 }
 
 .btn {
-    font-size: 15px;
+	font-size: 15px;
 }
 
 .product > .product-title {
-    font-size: 20px;
+	font-size: 20px;
 }
 
 @media (min-width: 576px) {
-    .product-container {
-        grid-template-columns: 1fr 1fr;
-    }
+	.products-container {
+		grid-template-columns: 1fr 1fr;
+	}
 }
 
 @media (min-width: 768px) {
-    .product-container {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
+	.products-container {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
 }
 
 @media (min-width: 1200px) {
-    .product-container {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
+	.products-container {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
 }
 
 .precio {
-    color: var(--oscuro);
-    margin: 10px;
-    font-weight: 700;
+	color: var(--oscuro);
+	margin: 10px;
+	font-weight: 700;
+}
+
+.mh {
+	min-height: calc(100vh - 152px);
 }
