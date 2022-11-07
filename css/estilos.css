@@ -55,59 +55,6 @@ html {
 	background-color: var(--footer);
 }
 
-.products-container {
-	display: grid;
-	grid-template-columns: 1fr;
-	column-gap: 10px;
-}
-
-.product {
-	border: var(--border);
-	border-radius: 0.375rem;
-	margin-bottom: 10px;
-}
-
-.product h4 {
-	margin: 10px;
-}
-
-.botones {
-	text-align: end;
-	margin: 10px;
-}
-
-.btn {
-	font-size: 15px;
-}
-
-.product > .product-title {
-	font-size: 20px;
-}
-
-@media (min-width: 576px) {
-	.products-container {
-		grid-template-columns: 1fr 1fr;
-	}
-}
-
-@media (min-width: 768px) {
-	.products-container {
-		grid-template-columns: 1fr 1fr 1fr;
-	}
-}
-
-@media (min-width: 1200px) {
-	.products-container {
-		grid-template-columns: 1fr 1fr 1fr 1fr;
-	}
-}
-
-.precio {
-	color: var(--oscuro);
-	margin: 10px;
-	font-weight: 700;
-}
-
 .mh {
 	min-height: calc(100vh - 152px);
 }
