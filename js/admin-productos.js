@@ -8,7 +8,6 @@ import {
 	ref as refStorage,
 	uploadBytes,
 	getDownloadURL,
-	getBlob,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
 
 const firebaseConfig = {
