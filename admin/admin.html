@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>Admin - Productos</title>
+
+		<link rel="shortcut icon" href="../img/logo.png" type="image/x-icon" />
+
+		<!-- Importar fuentes -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
+
+		<!-- Precargar estilos y scripts -->
+		<link rel="preload" href="../css/estilos.css" as="style" />
+		<link rel="preload" href="../css/bootstrap.min.css" as="style" />
+		<link rel="preload" href="../js/bootstrap.bundle.min.js" as="script" />
+
+		<!-- Importar estilos y scripts -->
+		<link rel="stylesheet" href="../css/estilos.css" />
+		<link rel="stylesheet" href="../css/bootstrap.min.css" />
+	</head>
+
+	<body class="bg-main">
+		<header class="bg-head d-flex align-content-center justify-content-center">
+			<h5 class="text-white my-2 text-center">Bienvenido al panel de administrador</h5>
+		</header>
+
+		<nav class="navbar navbar-expand-lg bg-navbar navbar-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand d-block d-lg-none" href="../index.html">AleTech</a>
+				<button
+					class="navbar-toggler bg-navbar"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNavAltMarkup"
+					aria-controls="navbarNavAltMarkup"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+					<a class="navbar-brand d-none d-lg-block" href="../index.html">AleTech</a>
+					<div class="navbar-nav">
+						<a class="nav-link" href="../index.html">Inicio</a>
+						<a class="nav-link" href="../empresa.html">Empresa</a>
+						<a class="nav-link" href="../productos.html">Productos</a>
+						<a class="nav-link" href="../contactos.html">Contactos</a>
+					</div>
+					<div class="navbar-nav">
+						<a class="nav-link align-self-center align-self-lg-end p-0" href="login.html">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="icon icon-tabler icon-tabler-user-circle"
+								width="40"
+								height="40"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="#ffffff"
+								fill="none"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+								<circle cx="12" cy="12" r="9" />
+								<circle cx="12" cy="10" r="3" />
+								<path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<main class="container mh py-4">
+			<h1 class="text-start mb-0">Administrar productos</h1>
+			<form class="mt-3 border border-3 p-3 rounded">
+				<div class="row mb-0 mb-md-2">
+					<div class="col-12 col-md-6 mb-2 mb-md-0">
+						<label for="nombre" class="form-label">Nombre</label>
+						<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Introduzca un nombre" required />
+					</div>
+					<div class="col-12 col-md-6 mb-2 mb-md-0">
+						<label for="precio" class="form-label">Precio</label>
+						<div class="input-group">
+							<span class="input-group-text">$</span>
+							<input type="text" id="precio" name="precio" class="form-control" placeholder="Introduzca un precio" required />
+						</div>
+					</div>
+				</div>
+				<div class="mb-2">
+					<label for="descripcion" class="form-label">Descripción</label>
+					<textarea
+						class="form-control"
+						id="descripcion"
+						name="descripcion"
+						rows="5"
+						placeholder="Introduzca una descripción"
+						required
+					></textarea>
+				</div>
+				<div class="mb-2 d-flex flex-column">
+					<label for="imagen" class="form-label">Imagen</label>
+					<img id="imgPreview" src="#" height="200" class="d-none align-self-center my-2" alt="Imagen introducida" />
+					<input class="form-control" type="file" id="imagen" accept="image/*" required />
+				</div>
+
+				<div class="d-flex flex-wrap justify-content-end gap-2">
+					<button class="btn btn-success" type="submit" id="btnAgregar">Agregar</button>
+					<button class="btn btn-warning" id="btnConsultar">Consultar</button>
+					<button class="btn btn-primary" id="btnActualizar">Actualizar</button>
+					<button class="btn btn-danger" id="btnEliminar">Eliminar</button>
+					<button class="btn btn-secondary" type="button" id="btnMostrar">Mostrar Registros</button>
+					<button class="btn btn-info" type="reset" id="btnLimpiar">Limpiar</button>
+				</div>
+
+				<table id="results" class="table table-light table-striped table-hover d-none mt-2 mb-0"></table>
+			</form>
+
+			<div class="modal fade" id="alertModal" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="alertTitle">Modal title</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p id="alertMessage">Modal body text goes here.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer class="bg-footer d-flex align-content-center justify-content-center py-3">
+			<h5 class="text-white text-center m-0">Todos los derechos reservados Alejandro Ivan Lizarraga Rojas</h5>
+		</footer>
+
+		<script src="../js/bootstrap.bundle.min.js"></script>
+		<script src="../js/admin-productos.js" type="module"></script>
+	</body>
+</html>

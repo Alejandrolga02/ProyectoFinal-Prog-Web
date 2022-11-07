@@ -25,6 +25,20 @@ html {
 	font-family: var(--fuente);
 }
 
+::-webkit-scrollbar {
+	width: 5px;
+	position: fixed;
+}
+
+::-webkit-scrollbar-track {
+	border-radius: 5px;
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.25);
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--navbar);
+}
+
 .bg-head {
 	background-color: var(--head);
 }
@@ -96,4 +110,8 @@ html {
 
 .mh {
 	min-height: calc(100vh - 152px);
+}
+
+.input-group-text {
+	cursor: default;
 }
