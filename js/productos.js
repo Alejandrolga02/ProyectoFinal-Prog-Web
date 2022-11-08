@@ -52,7 +52,7 @@ async function showProducts() {
 
 		products.classList.remove("d-none");
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }
 

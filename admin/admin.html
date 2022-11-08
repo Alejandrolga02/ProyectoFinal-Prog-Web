@@ -15,13 +15,13 @@
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
 
 	<!-- Precargar estilos y scripts -->
-	<link rel="preload" href="../css/estilos.css" as="style" />
 	<link rel="preload" href="../css/bootstrap.min.css" as="style" />
 	<link rel="preload" href="../js/bootstrap.bundle.min.js" as="script" />
+	<link rel="preload" href="../css/estilos.css" as="style" />
 
 	<!-- Importar estilos y scripts -->
-	<link rel="stylesheet" href="../css/estilos.css" />
 	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../css/estilos.css" />
 </head>
 
 <body class="bg-main">
@@ -46,7 +46,7 @@
 					<a class="nav-link" href="../contactos.html">Contactos</a>
 				</div>
 				<div class="navbar-nav">
-					<a class="nav-link align-self-center align-self-lg-end p-0" href="login.html">
+					<a class="nav-link align-self-center align-self-lg-end p-0" href="index.html">
 						<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle"
 							width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none"
 							stroke-linecap="round" stroke-linejoin="round">
@@ -133,15 +133,15 @@
 					</svg>
 					Actualizar
 				</button>
-				<button class="btn btn-danger" id="btnEliminar">
-					<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-off" width="26"
+				<button class="btn btn-toggle" id="btnDeshabilitar">
+					<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="26"
 						height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none"
 						stroke-linecap="round" stroke-linejoin="round">
 						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						<path d="M20.042 16.045a9 9 0 0 0 -12.087 -12.087m-2.318 1.677a9 9 0 1 0 12.725 12.73" />
-						<path d="M3 3l18 18" />
+						<circle cx="16" cy="12" r="2" />
+						<rect x="2" y="6" width="20" height="12" rx="6" />
 					</svg>
-					Deshabilitar
+					(Des)habilitar
 				</button>
 				<button class="btn btn-secondary" type="button" id="btnMostrar">
 					<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="26"

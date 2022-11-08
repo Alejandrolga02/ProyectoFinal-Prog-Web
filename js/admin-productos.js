@@ -15,7 +15,7 @@ const storage = getStorage();
 const btnAgregar = document.querySelector("#btnAgregar");
 const btnConsultar = document.querySelector("#btnConsultar");
 const btnActualizar = document.querySelector("#btnActualizar");
-const btnEliminar = document.querySelector("#btnEliminar");
+const btnDeshabilitar = document.querySelector("#btnDeshabilitar");
 const btnMostrar = document.querySelector("#btnMostrar");
 const btnLimpiar = document.querySelector("#btnLimpiar");
 const results = document.querySelector("#results");
@@ -71,7 +71,7 @@ const showAlert = (message, title) => {
 	myModal.show(modalToggle);
 };
 
-async function insertData() {
+async function insertProduct() {
 	try {
 		event.preventDefault();
 
@@ -96,7 +96,7 @@ async function insertData() {
 	}
 }
 
-async function showData() {
+async function lookUpProduct() {
 	try {
 		event.preventDefault();
 
@@ -136,28 +136,41 @@ async function showProducts() {
 			results.innerHTML = `<caption>Lista de productos</caption><thead><tr>
 					<th scope="col" width="5%" class="text-center">Código</th>
 					<th scope="col" width="30%" class="text-center">Nombre</th>
-					<th scope="col" width="35%" class="text-center">Descripción</th>
+					<th scope="col" width="30%" class="text-center">Descripción</th>
 					<th scope="col" width="15%" class="text-center">Precio</th>
 					<th scope="col" width="15%" class="text-center">Imagen</th>
+					<th scope="col" width="5%" class="text-center">Estado</th>
 				</tr></thead><tbody></tbody>`;
 
 			snapshot.forEach(childSnapshot => {
 				const childKey = childSnapshot.key;
 				const childData = childSnapshot.val();
 
-				if (childData.status === "0") {
-					let imgURL = childData.url;
+				let imgURL = childData.url;
+				let status = `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-square-check" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+					<rect x="4" y="4" width="16" height="16" rx="2" />
+					<path d="M9 12l2 2l4 -4" />
+				</svg>`;
 
-					if (childData.url === undefined) imgURL = urlDefault;
+				if (childData.url === undefined) imgURL = urlDefault;
 
-					results.lastElementChild.innerHTML += `<tr>
-						<th class="text-center" scope="row">${childKey}</th>
-						<td class="text-center">${childData.nombre}</td>
-						<td class="text-center">${childData.descripcion}</td>
-						<td class="text-center">${childData.precio}</td>
-						<td class="text-center p-0"><img class="w-100" src="${imgURL}" alt="Imagen de ${childData.nombre}"/></td>
-					</tr>`;
+				if (childData.status === "1") {
+					status = `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-square-x" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+						<rect x="4" y="4" width="16" height="16" rx="2" />
+						<path d="M10 10l4 4m0 -4l-4 4" />
+					</svg>`;
 				}
+
+				results.lastElementChild.innerHTML += `<tr>
+					<th class="text-center" scope="row">${childKey}</th>
+					<td class="text-center">${childData.nombre}</td>
+					<td class="text-center">${childData.descripcion}</td>
+					<td class="text-center">${childData.precio}</td>
+					<td class="text-center p-0"><img class="w-100" src="${imgURL}" alt="Imagen de ${childData.nombre}"/></td>
+					<td class="text-center">${status}</td>
+				</tr>`;
 			});
 		});
 
@@ -167,7 +180,7 @@ async function showProducts() {
 	}
 }
 
-async function updateData() {
+async function updateProduct() {
 	try {
 		event.preventDefault();
 
@@ -178,29 +191,40 @@ async function updateData() {
 		if (!codigo || !nombre || !descripcion) return showAlert("Existen campos vacios", "Error");
 
 		if (!imagen.value) {
-			await update(ref(db, "productos/" + codigo), { nombre, descripcion, precio: "$" + precio, status: "0" });
+			await update(ref(db, "productos/" + codigo), { nombre, descripcion, precio: "$" + precio });
 			return showAlert("Se realizó una actualización", "Resultado");
 		}
 
 		await uploadBytes(storageRef, imagen.files[0]);
 		let url = await getDownloadURL(storageRef);
 
-		await update(ref(db, "productos/" + codigo), { nombre, descripcion, precio: "$" + precio, url, status: "0" });
+		await update(ref(db, "productos/" + codigo), { nombre, descripcion, precio: "$" + precio, url });
 		return showAlert("Se realizó una actualización", "Resultado");
 	} catch (error) {
 		console.error(error);
 	}
 }
 
-async function deleteData() {
+async function disableProduct() {
 	try {
 		event.preventDefault();
 
 		let { codigo } = getInputs();
 		if (codigo === "") return showAlert("Introduzca un código", "Error");
+		const dbref = ref(db);
 
-		await update(ref(db, "productos/" + codigo), { status: "1" });
-		showAlert("El registro fue deshabilitado", "Resultado");
+		const snapshot = await get(child(dbref, "productos/" + codigo));
+		if (!snapshot.exists()) {
+			return showAlert("No existe un producto con ese código", "Error");
+		}
+
+		if (snapshot.val().status === "1") {
+			await update(ref(db, "productos/" + codigo), { status: "0" });
+			showAlert("El registro fue habilitado", "Resultado");
+		} else {
+			await update(ref(db, "productos/" + codigo), { status: "1" });
+			showAlert("El registro fue deshabilitado", "Resultado");
+		}
 
 		await showProducts();
 	} catch (error) {
@@ -208,10 +232,10 @@ async function deleteData() {
 	}
 }
 
-btnAgregar.addEventListener("click", insertData);
-btnConsultar.addEventListener("click", showData);
-btnActualizar.addEventListener("click", updateData);
-btnEliminar.addEventListener("click", deleteData);
+btnAgregar.addEventListener("click", insertProduct);
+btnConsultar.addEventListener("click", lookUpProduct);
+btnActualizar.addEventListener("click", updateProduct);
+btnDeshabilitar.addEventListener("click", disableProduct);
 btnMostrar.addEventListener("click", showProducts);
 btnLimpiar.addEventListener("click", clearInputs);
 imagen.addEventListener("change", imagenChange);
