@@ -56,7 +56,7 @@ html {
 }
 
 .mh {
-	min-height: calc(100vh - 152px);
+	min-height: calc(100vh - 150px);
 }
 
 .input-group-text {
