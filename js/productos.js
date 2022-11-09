@@ -32,8 +32,7 @@ async function showProducts() {
 
 					if (childData.url === undefined) imgURL = urlDefault;
 
-					products.innerHTML += `
-					<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+					products.innerHTML += `<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
 						<div class="card">
 							<img src="${imgURL}" class="card-img-top" alt="Imagen de ${childData.nombre}">
 							<div class="card-body">

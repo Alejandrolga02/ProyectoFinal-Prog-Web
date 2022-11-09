@@ -61,7 +61,7 @@ const imagenChange = () => {
 	document.querySelector("#imgPreview").classList.remove("d-none");
 };
 
-const showAlert = (message, title) => {
+function showAlert(message, title) {
 	const modalToggle = document.getElementById("alertModal");
 	const myModal = new bootstrap.Modal("#alertModal", { keyboard: true });
 
@@ -69,7 +69,7 @@ const showAlert = (message, title) => {
 	document.getElementById("alertMessage").innerHTML = message;
 
 	myModal.show(modalToggle);
-};
+}
 
 async function insertProduct() {
 	try {
