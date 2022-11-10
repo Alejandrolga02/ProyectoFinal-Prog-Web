@@ -58,7 +58,6 @@ const imagenChange = () => {
 
 async function insertProduct() {
 	try {
-		debugger;
 		event.preventDefault();
 
 		let { codigo, nombre, descripcion, precio } = getInputs();
@@ -103,7 +102,7 @@ async function lookUpProduct() {
 			let url = snapshot.val().url;
 
 			if (!url) url = await getDownloadURL(refStorage(storage, "imagenVacia.svg"));
-
+			document.querySelector("#imagen").value = "";
 			fillInputs({ codigo, nombre, descripcion, precio, url });
 		} else {
 			showAlert("No se encontró el registro", "Error");

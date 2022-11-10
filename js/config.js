@@ -31,20 +31,18 @@ export async function signIn(user, pass) {
 export function showAlert(message, title) {
 	const modalToggle = document.getElementById("alertModal");
 	const myModal = new bootstrap.Modal("#alertModal", { keyboard: false });
-
 	document.getElementById("alertTitle").innerHTML = title;
 	document.getElementById("alertMessage").innerHTML = message;
-
 	myModal.show(modalToggle);
 }
 
 onAuthStateChanged(auth, async user => {
 	if (user) {
-		if (window.location.pathname === "/admin/index.html" || window.location.pathname === "/admin/") {
+		if (window.location.pathname.includes("/admin/") && !window.location.pathname.includes("/admin/admin")) {
 			window.location.href = "/admin/admin.html";
 		}
 	} else {
-		if (window.location.pathname === "/admin/admin.html") {
+		if (window.location.pathname.includes("/admin/admin")) {
 			window.location.href = "/admin/index.html";
 		}
 	}
