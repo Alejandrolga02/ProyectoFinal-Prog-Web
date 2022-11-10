@@ -40,7 +40,7 @@ export function showAlert(message, title) {
 
 onAuthStateChanged(auth, async user => {
 	if (user) {
-		if (window.location.pathname === "/admin/index.html") {
+		if (window.location.pathname === "/admin/index.html" || window.location.pathname === "/admin/") {
 			window.location.href = "/admin/admin.html";
 		}
 	} else {
