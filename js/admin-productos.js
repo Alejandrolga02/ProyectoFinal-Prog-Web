@@ -1,15 +1,9 @@
 "use strict";
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
-import { getDatabase, onValue, ref, set, child, get, update } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
-import { getStorage, ref as refStorage, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
-
-import { firebaseConfig } from "./config.js";
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase();
-const storage = getStorage();
+import { onValue, ref, set, child, get, update } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+import { ref as refStorage, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+import { db, storage, auth, showAlert } from "./config.js";
 
 // Declarar elementos del DOM
 const btnAgregar = document.querySelector("#btnAgregar");
@@ -20,6 +14,7 @@ const btnMostrar = document.querySelector("#btnMostrar");
 const btnLimpiar = document.querySelector("#btnLimpiar");
 const results = document.querySelector("#results");
 const imagen = document.querySelector("#imagen");
+const logOut = document.querySelector("#logout");
 
 // Variables input
 const getInputs = () => {
@@ -61,18 +56,9 @@ const imagenChange = () => {
 	document.querySelector("#imgPreview").classList.remove("d-none");
 };
 
-function showAlert(message, title) {
-	const modalToggle = document.getElementById("alertModal");
-	const myModal = new bootstrap.Modal("#alertModal", { keyboard: true });
-
-	document.getElementById("alertTitle").innerHTML = title;
-	document.getElementById("alertMessage").innerHTML = message;
-
-	myModal.show(modalToggle);
-}
-
 async function insertProduct() {
 	try {
+		debugger;
 		event.preventDefault();
 
 		let { codigo, nombre, descripcion, precio } = getInputs();
@@ -92,7 +78,11 @@ async function insertProduct() {
 
 		showAlert("Se insertaron con exito los datos", "Resultado");
 	} catch (error) {
-		console.error(error);
+		if (error.code === "PERMISSION_DENIED" || error.code === "storage/unauthorized") {
+			showAlert("No estás autentificado", "Error");
+		} else {
+			console.error(error);
+		}
 	}
 }
 
@@ -119,7 +109,11 @@ async function lookUpProduct() {
 			showAlert("No se encontró el registro", "Error");
 		}
 	} catch (error) {
-		console.error(error);
+		if (error.code === "PERMISSION_DENIED") {
+			showAlert("No estás autentificado", "Error");
+		} else {
+			console.error(error);
+		}
 	}
 }
 
@@ -176,7 +170,11 @@ async function showProducts() {
 
 		results.classList.remove("d-none");
 	} catch (error) {
-		console.error(error);
+		if (error.code === "PERMISSION_DENIED") {
+			showAlert("No estás autentificado", "Error");
+		} else {
+			console.error(error);
+		}
 	}
 }
 
@@ -201,7 +199,11 @@ async function updateProduct() {
 		await update(ref(db, "productos/" + codigo), { nombre, descripcion, precio: "$" + precio, url });
 		return showAlert("Se realizó una actualización", "Resultado");
 	} catch (error) {
-		console.error(error);
+		if (error.code === "PERMISSION_DENIED" || error.code === "storage/unauthorized") {
+			showAlert("No estás autentificado", "Error");
+		} else {
+			console.error(error);
+		}
 	}
 }
 
@@ -228,7 +230,11 @@ async function disableProduct() {
 
 		await showProducts();
 	} catch (error) {
-		console.error(error);
+		if (error.code === "PERMISSION_DENIED") {
+			showAlert("No estás autentificado", "Error");
+		} else {
+			console.error(error);
+		}
 	}
 }
 
@@ -239,3 +245,8 @@ btnDeshabilitar.addEventListener("click", disableProduct);
 btnMostrar.addEventListener("click", showProducts);
 btnLimpiar.addEventListener("click", clearInputs);
 imagen.addEventListener("change", imagenChange);
+logOut.addEventListener("click", async e => {
+	e.preventDefault();
+
+	await signOut(auth);
+});
